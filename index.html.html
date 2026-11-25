@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRINITY AIR (TW) × SONO HOTELS & RESORTS | 최종 에어텔 플래너</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', '"Noto Sans KR"', 'sans-serif'],
+            display: ['"Inter"', '"Noto Sans KR"', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              800: '#162447',
+              900: '#0B132B',
+              950: '#070D1F',
+            },
+            champagne: {
+              100: '#F9F4E8',
+              300: '#EAD8B1',
+              400: '#D4AF37',
+              500: '#B89225',
+            }
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-[#F8F7F4] text-slate-800 antialiased selection:bg-sky-500 selection:text-white">
+
+  <!-- 상단 브랜드 헤더 -->
+  <header class="bg-navy-900 text-white sticky top-0 z-40 shadow-lg border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 flex flex-col items-center justify-center shadow-md shadow-sky-500/25 shrink-0">
+          <i class="fa-solid fa-plane-departure text-white text-sm"></i>
+          <span class="font-display font-extrabold text-[10px] tracking-widest text-white leading-none mt-0.5">TW</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-display font-extrabold tracking-wider text-base sm:text-lg text-white">TRINITY AIR</span>
+            <span class="px-1.5 py-0.5 rounded bg-sky-500/25 border border-sky-400/40 text-sky-300 font-display font-bold text-[11px]">IATA: TW</span>
+            <span class="text-champagne-400 font-bold">×</span>
+            <span class="font-display font-extrabold tracking-wider text-base sm:text-lg text-champagne-300">SONO HOTELS & RESORTS</span>
+          </div>
+          <p class="text-xs text-slate-300">트리니티 항공(TW) × 소노호텔앤리조트 해외 8대 숙박 거점 예산·일정 플래너</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 self-start sm:self-auto">
+        <span id="header-flight-pill" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 text-champagne-300 border border-champagne-400/30 font-display">
+          <i class="fa-solid fa-ticket text-sky-400"></i>
+          <span>TW121 연계</span>
+        </span>
+        <button type="button" onclick="openSummaryModal()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-xs sm:text-sm font-bold transition shadow-md shadow-sky-500/25 cursor-pointer">
+          <i class="fa-solid fa-file-invoice"></i>
+          <span>견적 & 일정 요약</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 메인 컨테이너 -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+
+      <!-- 좌측 패널: 취항지 및 여행 조건 설정 (5 cols) -->
+      <section class="lg:col-span-5 space-y-6">
+
+        <!-- 1. TW 취항지 & 소노 해외 8대 숙박 거점 선택 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 sm:p-6">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-base sm:text-lg font-bold text-navy-900 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-navy-900 text-white text-xs flex items-center justify-center font-display">1</span>
+              TW 취항지 & 소노 해외 거점 (8곳)
+            </h2>
+            <span class="text-xs text-sky-600 font-bold bg-sky-50 px-2.5 py-1 rounded-full">최종 확정 8곳</span>
+          </div>
+
+          <!-- 지역 필터 탭 -->
+          <div class="grid grid-cols-4 gap-1.5 bg-slate-100 p-1 rounded-xl mb-3.5" id="region-tabs">
+            <button type="button" data-region="all" class="region-tab py-1.5 rounded-lg text-xs font-bold transition cursor-pointer">전체 (8)</button>
+            <button type="button" data-region="asia" class="region-tab py-1.5 rounded-lg text-xs font-bold transition cursor-pointer">아시아 (4)</button>
+            <button type="button" data-region="americas" class="region-tab py-1.5 rounded-lg text-xs font-bold transition cursor-pointer">미주·하와이 (3)</button>
+            <button type="button" data-region="europe" class="region-tab py-1.5 rounded-lg text-xs font-bold transition cursor-pointer">유럽 (1)</button>
+          </div>
+
+          <!-- 목적지 카드 리스트 -->
+          <div id="destination-list" class="space-y-2 max-h-[430px] overflow-y-auto pr-1">
+            <!-- JS로 렌더링됨 -->
+          </div>
+        </div>
+
+        <!-- 2. 출발일, 숙박 기간(2박~10박), 인원 설정 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 sm:p-6 space-y-5">
+          <h2 class="text-base sm:text-lg font-bold text-navy-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-navy-900 text-white text-xs flex items-center justify-center font-display">2</span>
+            출발일 · 숙박 기간(2~10박) · 인원
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="departure-date" class="block text-xs font-semibold text-slate-600 mb-1.5">인천(ICN) 출발일</label>
+              <input type="date" id="departure-date" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500" />
+            </div>
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="nights-slider" class="text-xs font-semibold text-slate-600">숙박 기간</label>
+                <span id="nights-display" class="text-xs font-extrabold text-sky-600 bg-sky-50 px-2 py-0.5 rounded-md">3박 4일</span>
+              </div>
+              <input type="range" id="nights-slider" min="2" max="10" step="1" value="3"
+                class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-navy-900 mt-2" />
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1 font-display">
+                <span>2박</span>
+                <span>4박</span>
+                <span>6박</span>
+                <span>8박</span>
+                <span>10박</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 빠른 박수 선택 버튼 -->
+          <div class="grid grid-cols-5 gap-1.5" id="nights-quick-btns">
+            <button type="button" data-nights="2" class="night-quick-btn py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer">2박3일</button>
+            <button type="button" data-nights="3" class="night-quick-btn py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer">3박4일</button>
+            <button type="button" data-nights="4" class="night-quick-btn py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer">4박5일</button>
+            <button type="button" data-nights="5" class="night-quick-btn py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer">5박6일</button>
+            <button type="button" data-nights="7" class="night-quick-btn py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer">7박8일</button>
+          </div>
+
+          <!-- 인원수 카운터 -->
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/70 flex items-center justify-between">
+              <div>
+                <div class="text-xs font-bold text-slate-800">성인</div>
+                <div class="text-[11px] text-slate-500">만 12세 이상</div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="updatePax('adults', -1)" class="w-7 h-7 rounded-lg bg-white border border-slate-300 text-slate-600 hover:bg-slate-100 flex items-center justify-center font-bold cursor-pointer">-</button>
+                <span id="adults-count" class="w-5 text-center text-sm font-bold text-navy-900">2</span>
+                <button type="button" onclick="updatePax('adults', 1)" class="w-7 h-7 rounded-lg bg-white border border-slate-300 text-slate-600 hover:bg-slate-100 flex items-center justify-center font-bold cursor-pointer">+</button>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/70 flex items-center justify-between">
+              <div>
+                <div class="text-xs font-bold text-slate-800">아동</div>
+                <div class="text-[11px] text-slate-500">만 2~11세 (75%)</div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="updatePax('children', -1)" class="w-7 h-7 rounded-lg bg-white border border-slate-300 text-slate-600 hover:bg-slate-100 flex items-center justify-center font-bold cursor-pointer">-</button>
+                <span id="children-count" class="w-5 text-center text-sm font-bold text-navy-900">0</span>
+                <button type="button" onclick="updatePax('children', 1)" class="w-7 h-7 rounded-lg bg-white border border-slate-300 text-slate-600 hover:bg-slate-100 flex items-center justify-center font-bold cursor-pointer">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. TW 좌석 등급 & 소노 객실/체류비 설정 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 sm:p-6 space-y-5">
+          <h2 class="text-base sm:text-lg font-bold text-navy-900 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-navy-900 text-white text-xs flex items-center justify-center font-display">3</span>
+            TW 좌석 등급 · 객실 · 체류비 설정
+          </h2>
+
+          <!-- 항공 좌석 등급 -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-2">트리니티 항공 (TW) 좌석 클래스</label>
+            <div class="grid grid-cols-2 gap-2.5" id="seat-selector">
+              <button type="button" data-seat="economy" class="seat-btn p-3 rounded-xl border text-left transition cursor-pointer">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-bold">이코노미 스마트</span>
+                  <i class="fa-solid fa-chair text-xs"></i>
+                </div>
+                <p class="text-[11px] opacity-80">기본 수하물 + 기내 서비스</p>
+              </button>
+              <button type="button" data-seat="business" class="seat-btn p-3 rounded-xl border text-left transition cursor-pointer">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-xs font-bold">비즈니스 세이버</span>
+                  <i class="fa-solid fa-crown text-xs text-champagne-400"></i>
+                </div>
+                <p class="text-[11px] opacity-80">광폭 좌석 · 라운지 · 우선수속</p>
+              </button>
+            </div>
+          </div>
+
+          <!-- 소노 객실 타입 -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-600 mb-2">소노 계열 호텔·리조트 객실 등급</label>
+            <div class="grid grid-cols-3 gap-2" id="room-selector">
+              <button type="button" data-room="standard" class="room-btn p-2.5 rounded-xl border text-center transition cursor-pointer">
+                <div class="text-xs font-bold mb-0.5">디럭스/스탠다드</div>
+                <div class="text-[10px] opacity-75">기본 객실</div>
+              </button>
+              <button type="button" data-room="suite" class="room-btn p-2.5 rounded-xl border text-center transition cursor-pointer">
+                <div class="text-xs font-bold mb-0.5">시그니처 스위트</div>
+                <div class="text-[10px] opacity-75">파노라마 뷰</div>
+              </button>
+              <button type="button" data-room="villa" class="room-btn p-2.5 rounded-xl border text-center transition cursor-pointer">
+                <div class="text-xs font-bold mb-0.5">프레스티지·빌라</div>
+                <div class="text-[10px] opacity-75">클럽/프리미엄</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- 현지 체류비 조절 -->
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <label class="text-xs font-semibold text-slate-600">현지 체류비 (식비·교통·액티비티)</label>
+              <span id="activity-label" class="text-xs font-bold text-sky-600">밸런스 투어</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2" id="activity-selector">
+              <button type="button" data-activity="light" class="act-btn py-2 px-2 rounded-xl border text-xs font-semibold transition cursor-pointer">실속 자유여행</button>
+              <button type="button" data-activity="standard" class="act-btn py-2 px-2 rounded-xl border text-xs font-semibold transition cursor-pointer">밸런스 투어</button>
+              <button type="button" data-activity="luxury" class="act-btn py-2 px-2 rounded-xl border text-xs font-semibold transition cursor-pointer">럭셔리 다이닝</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 우측 패널: 선택 거점 배너, 실시간 예산 분석, 일차별 일정 빌더 (7 cols) -->
+      <section class="lg:col-span-7 space-y-6">
+
+        <!-- 선택된 목적지 & 항공편 배너 -->
+        <div id="hero-banner" class="relative overflow-hidden rounded-2xl bg-navy-900 text-white p-5 sm:p-6 shadow-md border border-white/10">
+          <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-1.5">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span id="hero-region-badge" class="px-2.5 py-0.5 rounded-md bg-sky-500/20 text-sky-300 border border-sky-400/30 text-xs font-semibold">아시아 · 베트남</span>
+                <span id="hero-flight-code" class="px-2.5 py-0.5 rounded-md bg-champagne-400/20 text-champagne-300 border border-champagne-400/40 text-xs font-display font-extrabold">FLIGHT TW121 · 비행 4시간 30분</span>
+              </div>
+              <h1 id="hero-title" class="text-xl sm:text-2xl font-extrabold text-white">소노벨 하이퐁 (SONO BELLE Hai Phong)</h1>
+              <p id="hero-subtitle" class="text-xs sm:text-sm text-slate-300">프라이빗 리버사이드 휴양 & 레저 리조트</p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3 text-left sm:text-right shrink-0">
+              <div class="text-[10px] uppercase tracking-wider text-sky-300 font-display font-bold">TRINITY AIR (TW)</div>
+              <div id="hero-schedule-out" class="text-xs font-bold text-white mt-1 font-display">ICN 08:30 → HPH 11:20</div>
+              <div id="hero-schedule-in" class="text-xs text-champagne-300 mt-0.5 font-display">HPH 12:30 → ICN 18:55</div>
+            </div>
+          </div>
+          <div class="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-sky-500/15 blur-2xl pointer-events-none"></div>
+          <div class="absolute -left-10 -bottom-16 w-48 h-48 rounded-full bg-champagne-400/10 blur-2xl pointer-events-none"></div>
+        </div>
+
+        <!-- 실시간 예산 분석 & TRINITY × SONO 결합혜택 엔진 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 sm:p-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-navy-900 flex items-center gap-2">
+                <i class="fa-solid fa-chart-pie text-sky-500"></i>
+                실시간 예산 분석 & 결합혜택 엔진
+              </h2>
+              <p class="text-xs text-slate-500 mt-0.5">트리니티 항공(TW)과 소노호텔앤리조트 결합 시 제휴 혜택이 자동 반영됩니다.</p>
+            </div>
+
+            <!-- 결합혜택 토글 스위치 -->
+            <label class="inline-flex items-center gap-2.5 bg-navy-900 text-white px-3.5 py-2 rounded-xl cursor-pointer select-none shadow-sm shrink-0">
+              <input type="checkbox" id="synergy-toggle" checked class="sr-only peer" />
+              <div class="relative w-9 h-5 bg-slate-600 rounded-full peer peer-checked:bg-champagne-400 transition-colors after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-4"></div>
+              <span class="text-xs font-bold text-champagne-300">TRINITY × SONO 결합혜택</span>
+            </label>
+          </div>
+
+          <!-- 결합혜택 4종 배지 -->
+          <div id="synergy-badges" class="grid grid-cols-2 sm:grid-cols-4 gap-2 my-4 transition-opacity duration-200">
+            <div class="px-2.5 py-2 rounded-xl bg-champagne-100/70 text-amber-900 border border-amber-200/80 text-[11px] font-bold flex items-center gap-1.5">
+              <i class="fa-solid fa-percent text-amber-600"></i>
+              <span>객실 15% 제휴할인</span>
+            </div>
+            <div class="px-2.5 py-2 rounded-xl bg-sky-50 text-sky-900 border border-sky-200/80 text-[11px] font-bold flex items-center gap-1.5">
+              <i class="fa-solid fa-suitcase-rolling text-sky-600"></i>
+              <span>수하물 +5kg 무료</span>
+            </div>
+            <div class="px-2.5 py-2 rounded-xl bg-indigo-50 text-indigo-900 border border-indigo-200/80 text-[11px] font-bold flex items-center gap-1.5">
+              <i class="fa-solid fa-clock text-indigo-600"></i>
+              <span>14:00 레이트체크아웃</span>
+            </div>
+            <div class="px-2.5 py-2 rounded-xl bg-emerald-50 text-emerald-900 border border-emerald-200/80 text-[11px] font-bold flex items-center gap-1.5">
+              <i class="fa-solid fa-van-shuttle text-emerald-600"></i>
+              <span>공항-호텔 셔틀 혜택</span>
+            </div>
+          </div>
+
+          <!-- 항목별 비용 카드 3종 -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70">
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+                <span>항공권 (<span id="flight-code-mini" class="font-bold text-navy-900">TW121</span>)</span>
+                <span id="ratio-flight" class="text-[11px] font-bold text-sky-600">0%</span>
+              </div>
+              <div id="cost-flight" class="text-base font-extrabold text-navy-900 font-display">0원</div>
+              <div id="cost-flight-sub" class="text-[11px] text-slate-400 mt-0.5">왕복 운임·택스 포함</div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70">
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+                <span>숙박 (SONO 계열)</span>
+                <span id="ratio-hotel" class="text-[11px] font-bold text-champagne-500">0%</span>
+              </div>
+              <div class="flex items-baseline gap-1.5">
+                <span id="cost-hotel" class="text-base font-extrabold text-navy-900 font-display">0원</span>
+                <span id="cost-hotel-orig" class="text-[11px] text-slate-400 line-through hidden">0원</span>
+              </div>
+              <div id="cost-hotel-sub" class="text-[11px] text-emerald-600 font-medium mt-0.5">15% 결합할인 적용</div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70">
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+                <span>현지 체류비</span>
+                <span id="ratio-activity" class="text-[11px] font-bold text-indigo-600">0%</span>
+              </div>
+              <div id="cost-activity" class="text-base font-extrabold text-navy-900 font-display">0원</div>
+              <div id="cost-activity-sub" class="text-[11px] text-slate-400 mt-0.5">식비·교통·액티비티</div>
+            </div>
+          </div>
+
+          <!-- 항목별 비율 스택 바 -->
+          <div class="mb-5">
+            <div class="flex items-center justify-between text-[11px] text-slate-500 mb-1.5">
+              <span>예산 구성 비율</span>
+              <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-sky-500"></span>항공</span>
+                <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-champagne-400"></span>숙박</span>
+                <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-indigo-500"></span>현지 체류</span>
+              </div>
+            </div>
+            <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden flex">
+              <div id="stack-bar-flight" class="bg-sky-500 h-full transition-all duration-300" style="width: 34%;"></div>
+              <div id="stack-bar-hotel" class="bg-champagne-400 h-full transition-all duration-300" style="width: 33%;"></div>
+              <div id="stack-bar-activity" class="bg-indigo-500 h-full transition-all duration-300" style="width: 33%;"></div>
+            </div>
+          </div>
+
+          <!-- 총 예상 견적 하이라이트 박스 -->
+          <div class="rounded-2xl bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 text-white p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-xs text-slate-300">총 예상 패키지 견적</span>
+                <span id="total-saved-badge" class="px-2 py-0.5 rounded-md bg-champagne-400 text-navy-950 text-[11px] font-extrabold">총 0원 절약</span>
+              </div>
+              <div id="total-cost" class="text-2xl sm:text-3xl font-extrabold text-white font-display mt-1">0원</div>
+            </div>
+            <div class="sm:text-right border-t sm:border-t-0 pt-3 sm:pt-0 border-white/10">
+              <div class="text-xs text-slate-300">1인당 평균 예상 경비</div>
+              <div id="per-person-cost" class="text-lg sm:text-xl font-bold text-sky-400 font-display mt-0.5">0원</div>
+            </div>
+          </div>
+
+          <!-- 목표 총 예산 입력 & 실시간 게이지 -->
+          <div class="mt-5 pt-4 border-t border-slate-100">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
+              <div class="flex items-center gap-2">
+                <label for="target-budget-input" class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                  <i class="fa-solid fa-bullseye text-sky-500"></i>
+                  목표 총 예산 (원):
+                </label>
+                <input type="number" id="target-budget-input" step="100000" min="500000" value="3500000"
+                  class="w-36 rounded-lg border border-slate-300 px-2.5 py-1 text-xs font-extrabold text-navy-900 font-display focus:outline-none focus:ring-2 focus:ring-sky-500" />
+              </div>
+              <span id="budget-status-badge" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 self-start sm:self-auto">
+                예산 내 여유
+              </span>
+            </div>
+
+            <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200/80 p-0.5">
+              <div id="budget-gauge-bar" class="h-full rounded-full bg-emerald-500 transition-all duration-300" style="width: 65%;"></div>
+            </div>
+            <div class="flex justify-between text-[11px] text-slate-500 mt-1.5">
+              <span>0원</span>
+              <span id="budget-diff-text" class="font-semibold text-slate-700">목표 예산 대비 여유가 있습니다.</span>
+              <span>100%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 일차별(Day 1 ~ Day N) 인터랙티브 일정 빌더 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 sm:p-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5">
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-navy-900 flex items-center gap-2">
+                <i class="fa-solid fa-route text-champagne-500"></i>
+                일차별 맞춤형 일정 빌더 (Day 1 ~ Day <span id="itinerary-total-days">4</span>)
+              </h2>
+              <p class="text-xs text-slate-500 mt-0.5">오전/오후/저녁 일정의 제목·상세 동선·메모·비용을 직접 수정하거나 항목을 추가·삭제하세요.</p>
+            </div>
+            <button type="button" onclick="resetItinerary()" class="text-xs font-semibold text-slate-600 hover:text-navy-900 flex items-center gap-1 self-start sm:self-auto px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 transition cursor-pointer">
+              <i class="fa-solid fa-rotate-left"></i> 기본 추천코스 복원
+            </button>
+          </div>
+
+          <div id="itinerary-container" class="space-y-4">
+            <!-- JS로 렌더링됨 -->
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- 견적 및 일정 요약 모달 -->
+  <div id="summary-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-navy-950/75 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+      <!-- 모달 헤더 -->
+      <div class="bg-navy-900 text-white px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-ticket text-champagne-400 text-lg"></i>
+          <div>
+            <h3 class="font-bold text-base">TRINITY AIR (TW) × SONO 견적 & 일정 요약</h3>
+            <p class="text-[11px] text-slate-300">항공·숙박·현지 일정 통합 리포트</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeSummaryModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition cursor-pointer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- 모달 본문 -->
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-4 text-sm bg-slate-50" id="modal-summary-content">
+        <!-- JS로 채워짐 -->
+      </div>
+
+      <!-- 모달 푸터 -->
+      <div class="px-6 py-4 bg-white border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <span id="copy-feedback" class="text-xs font-bold text-emerald-600 opacity-0 transition-opacity">
+          <i class="fa-solid fa-circle-check"></i> 견적 및 일정 요약이 클립보드에 복사되었습니다.
+        </span>
+        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+          <button type="button" onclick="closeSummaryModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 transition cursor-pointer">
+            닫기
+          </button>
+          <button type="button" onclick="copySummaryText()" class="px-4 py-2 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition cursor-pointer">
+            <i class="fa-regular fa-copy"></i> 원클릭 전체 텍스트 복사
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 클립보드 복사용 숨김 textarea -->
+  <textarea id="clipboard-helper" class="sr-only" aria-hidden="true"></textarea>
+
+  <script>
+    // =========================================================================
+    // 1. 확정 데이터 모델: 트리니티 항공(TW) × 소노호텔앤리조트 해외 8대 숙박 거점
+    //    (일본 가루이자와 제외, 괌/골프장 제외)
+    // =========================================================================
+    const DESTINATIONS = [
+      {
+        id: 'haiphong',
+        regionGroup: 'asia',
+        regionLabel: '아시아 · 베트남',
+        city: '베트남 하이퐁 (HPH)',
+        airportCode: 'HPH',
+        resort: '소노벨 하이퐁 (SONO BELLE Hai Phong)',
+        tagline: '프라이빗 리버사이드 휴양 & 레저 리조트',
+        flightNo: 'TW121',
+        returnFlightNo: 'TW122',
+        flightDuration: '4시간 30분',
+        scheduleOut: 'ICN 08:30 → HPH 11:20',
+        scheduleIn: 'HPH 12:30 → ICN 18:55',
+        flightBase: 360000,
+        hotelBase: 210000,
+        activityDaily: 90000,
+        badge: '리조트 휴양',
+        itineraryTemplates: {
+          arrival: [
+            { time: '오전', title: '인천(ICN) 출발 → 하이퐁(HPH) 도착 (TW121)', desc: '트리니티 항공 탑승 후 전용 셔틀로 소노벨 하이퐁 이동', cost: 0 },
+            { time: '오후', title: '소노벨 하이퐁 체크인 & 리조트 휴식', desc: '체크인 후 리조트 라군 풀 및 스파·산책 코스 이용', cost: 40000 },
+            { time: '저녁', title: '리버사이드 씨푸드 디너', desc: '하이퐁 현지 특선 해산물 요리 및 라운지 휴식', cost: 65000 }
+          ],
+          middle: [
+            [
+              { time: '오전', title: '하롱베이 데이 크루즈 투어', desc: '주요 동굴 및 해상 경관 감상', cost: 95000 },
+              { time: '오후', title: '전망대 관람 & 리조트 복귀', desc: '선상 티타임 및 리조트 휴식', cost: 25000 },
+              { time: '저녁', title: '하이퐁 시내 로컬 미식 투어', desc: '분짜·반다꾸아 등 현지 메뉴 및 야경 산책', cost: 45000 }
+            ],
+            [
+              { time: '오전', title: '소노벨 하이퐁 스파 & 웰니스', desc: '리조트 부대시설 및 아로마 테라피', cost: 70000 },
+              { time: '오후', title: '깟바섬 연계 또는 풀사이드 휴식', desc: '여유로운 호캉스 및 애프터눈 티', cost: 50000 },
+              { time: '저녁', title: '리조트 레스토랑 정찬 디너', desc: '셰프 특선 코스 요리 및 야간 휴식', cost: 60000 }
+            ]
+          ],
+          departure: [
+            { time: '오전', title: '조식 후 체크아웃 준비', desc: '14:00 레이트 체크아웃 혜택 활용 후 공항 이동', cost: 0 },
+            { time: '오후', title: '하이퐁(HPH) 출발 → 인천(ICN) 귀국 (TW122)', desc: 'TW × SONO 수하물 +5kg 혜택 적용 수속', cost: 0 },
+            { time: '저녁', title: '인천국제공항 도착', desc: '하이퐁 일정 마무리', cost: 0 }
+          ]
+        }
+      },
+      {
+        id: 'nagoya',
+        regionGroup: 'asia',
+        regionLabel: '아시아 · 일본',
+        city: '일본 나고야 (NGO)',
+        airportCode: 'NGO',
+        resort: '소노문 나고야 (SONO MOON Nagoya)',
+        tagline: '나고야 시내 중심 접근성 · 소노인터내셔널 일본 시티 호텔',
+        flightNo: 'TW237',
+        returnFlightNo: 'TW238',
+        flightDuration: '1시간 55분',
+        scheduleOut: 'ICN 09:05 → NGO 11:00',
+        scheduleIn: 'NGO 12:10 → ICN 14:15',
+        flightBase: 290000,
+        hotelBase: 230000,
+        activityDaily: 115000,
+        badge: '나고야 시티',
+        itineraryTemplates: {
+          arrival: [
+            { time: '오전', title: '인천(ICN) 출발 → 나고야(NGO) 도착 (TW237)', desc: '트리니티 항공 탑승 후 특급열차로 시내 이동', cost: 15000 },
+            { time: '오후', title: '소노문 나고야 체크인 & 사카에 산책', desc: '오아시스 21·미라이 타워 주변 및 시내 탐방', cost: 30000 },
+            { time: '저녁', title: '나고야 히츠마부시(장어덮밥) 디너', desc: '현지 명물 만찬 및 사카에 야경 감상', cost: 55000 }
+          ],
+          middle: [
+            [
+              { time: '오전', title: '나고야성 & 노리타케의 숲 관람', desc: '성곽 및 문화공원 산책', cost: 25000 },
+              { time: '오후', title: '도요타 산업기술기념관 또는 테마파크', desc: '전시 관람 및 카페 휴식', cost: 65000 },
+              { time: '저녁', title: '미소카츠·테바사키 미식 투어', desc: '나고야 대표 음식과 로컬 다이닝', cost: 45000 }
+            ],
+            [
+              { time: '오전', title: '오스 상점가 & 오스 관음사 투어', desc: '전통 사찰 및 상점가 골목 탐방', cost: 30000 },
+              { time: '오후', title: '나고야역(메이에키) 쇼핑 & 카페', desc: '복합 쇼핑몰 및 디저트 타임', cost: 90000 },
+              { time: '저녁', title: '소노문 나고야 복귀 & 야경 감상', desc: '호텔 주변 산책 및 휴식', cost: 50000 }
+            ]
+          ],
+          departure: [
+            { time: '오전', title: '조식 후 체크아웃 & 센트레아 공항 이동', desc: '공항 내 전망 시설 및 면세 구역 이용', cost: 20000 },
+            { time: '오후', title: '나고야(NGO) 출발 → 인천(ICN) 귀국 (TW238)', desc: 'TW × SONO 수하물 +5kg 혜택 적용 수속', cost: 0 },
+            { time: '저녁', title: '인천국제공항 도착', desc: '나고야 일정 마무리', cost: 0 }
+          ]
+        }
+      },
+      {
+        id: 'thailand',
+        regionGroup: 'asia',
+        regionLabel: '아시아 · 태국',
+        city: '태국 방콕·치앙마이·파타야 (BKK)',
+        airportCode: 'BKK',
+        resort: '크로스 호텔앤리조트 태국 (Cross / Cross Vibe / Away / Lumen)',
+        tagline: '방콕·치앙마이·파타야 부티크 & 리조트 컬렉션',
+        flightNo: 'TW101',
+        returnFlightNo: 'TW102',
+        flightDuration: '5시간 40분',
+        scheduleOut: 'ICN 17:40 → BKK 21:35',
+        scheduleIn: 'BKK 22:55 → ICN 06:30(+1)',
+        flightBase: 390000,
+        hotelBase: 250000,
+        activityDaily: 105000,
+        badge: '태국 크로스',
+        itineraryTemplates: {
+          arrival: [
+            { time: '오전', title: '출국 준비 및 인천공항 이동', desc: '트리니티 항공 태국 노선 탑승 준비', cost: 0 },
+            { time: '오후', title: '인천(ICN) 출발 → 방콕(BKK) 도착 (TW101)', desc: '도착 후 연계 셔틀·차량으로 호텔 이동', cost: 0 },
+            { time: '저녁', title: '크로스 호텔앤리조트 체크인 & 휴식', desc: '수영장 라운지 및 가벼운 야식', cost: 35000 }
+          ],
+          middle: [
+            [
+              { time: '오전', title: '차오프라야 강변 사원 & 문화 투어', desc: '주요 사원 관람 및 전통 마사지', cost: 50000 },
+              { time: '오후', title: '아이콘시암·시암 쇼핑 & 미식', desc: '쇼핑몰 투어 및 태국 로컬 푸드', cost: 45000 },
+              { time: '저녁', title: '스카이 뷰 라운지 & 스파 휴식', desc: '야경 감상 및 스파 테라피', cost: 85000 }
+            ],
+            [
+              { time: '오전', title: '파타야 해변·치앙마이 올드타운 연계 투어', desc: '지역별 시그니처 코스 및 카페 탐방', cost: 90000 },
+              { time: '오후', title: '리조트 풀사이드 휴식', desc: '애프터눈 티 및 휴식 시간', cost: 30000 },
+              { time: '저녁', title: '타이 씨푸드 & 파인다이닝', desc: '리조트 또는 시내 레스토랑 디너', cost: 65000 }
+            ]
+          ],
+          departure: [
+            { time: '오전', title: '조식 후 체크아웃 및 여유 일정', desc: '14:00 레이트 체크아웃 혜택 활용', cost: 0 },
+            { time: '오후', title: '시내 쇼핑 후 공항(BKK) 이동', desc: '전용 셔틀 연계 공항 이동', cost: 50000 },
+            { time: '저녁', title: '방콕(BKK) 출발 → 익일 오전 인천(ICN) 도착 (TW102)', desc: '수하물 +5kg 혜택 적용 귀국', cost: 0 }
+          ]
+        }
+      },
+      {
+        id: 'indonesia',
+        regionGroup: 'asia',
+        regionLabel: '아시아 · 인도네시아',
+        city: '인도네시아 발리 레기안 (DPS)',
+        airportCode: 'DPS',
+        resort: '소노벨 발리 레기안 (SONO Belle Bali Legian)',
+        tagline: '발리 레기안 중심가 · 소노 브랜드 리브랜딩 리조트',
+        flightNo: 'TW155',
+        returnFlightNo: 'TW156',
+        flightDuration: '7시간 00분',
+        scheduleOut: 'ICN 15:20 → DPS 21:20',
+        scheduleIn: 'DPS 22:45 → ICN 06:45(+1)',
+        flightBase: 540000,
+        hotelBase: 310000,
+        activityDaily: 110000,
+        badge: '소노벨 발리',
+        itineraryTemplates: {
+          arrival: [
+            { time: '오전', title: '인천국제공항 출국 수속', desc: '트리니티 항공 발리 노선 탑승 준비', cost: 0 },
+            { time: '오후', title: '인천(ICN) 출발 → 발리(DPS) 도착 (TW155)', desc: '기내 휴식 및 도착 수속', cost: 0 },
+            { time: '저녁', title: '소노벨 발리 레기안 체크인 & 휴식', desc: '공항 셔틀 연계 이동 후 리조트 체크인', cost: 30000 }
+          ],
+          middle: [
+            [
+              { time: '오전', title: '리조트 조식 & 레기안 비치 산책', desc: '해변 산책 및 카페 브런치', cost: 35000 },
+              { time: '오후', title: '우붓 계단식 논 & 문화 투어', desc: '우붓 시장·갤러리 및 정글 뷰 카페', cost: 75000 },
+              { time: '저녁', title: '짐바란 비치 선셋 씨푸드 디너', desc: '해변 노을 감상 및 해산물 만찬', cost: 70000 }
+            ],
+            [
+              { time: '오전', title: '울루와뚜 절벽 사원 & 남부 해안 투어', desc: '해안 절벽 전망대 관람', cost: 40000 },
+              { time: '오후', title: '스미냑·레기안 스파 & 비치클럽', desc: '발리니스 스파 및 휴식', cost: 85000 },
+              { time: '저녁', title: '소노벨 발리 레스토랑 디너', desc: '리조트 다이닝 및 야간 휴식', cost: 60000 }
+            ]
+          ],
+          departure: [
+            { time: '오전', title: '조식 후 체크아웃 & 레기안 쇼핑', desc: '14:00 레이트 체크아웃 혜택 활용', cost: 40000 },
+            { time: '오후', title: '셔틀로 발리 공항(DPS) 이동', desc: '면세 쇼핑 및 출국 수속 (수하물 +5kg 혜택)', cost: 0 },
+            { time: '저녁', title: '발리(DPS) 출발 → 익일 오전 인천(ICN) 도착 (TW156)', desc: '발리 일정 마무리', cost: 0 }
+          ]
+        }
+      },
+      {
+        id: 'newyork',
+        regionGroup: 'americas',
+        regionLabel: '미주 · 미국 동부',
+        city: '미국 뉴욕 맨해튼 (JFK)',
+        airportCode: 'JFK',
+        resort: '33호텔 바이 소노캄 뉴욕 시포트 (33 Hotel by SONO Calm NYC Seaport)',
+        tagline: '로우어 맨해튼 시포트 · 브루클린 브리지 인접 부티크 호텔',
+        flightNo: 'TW701',
+        returnFlightNo: 'TW702',
+        flightDuration: '14시간 10분',
+        scheduleOut: 'ICN 10:30 → JFK 11:40',
+        scheduleIn: 'JFK 13:50 → ICN 17:30(+1)',
+        flightBase: 1350000,
+        hotelBase: 560000,
+        activityDaily: 210000,
+        badge: '뉴욕 시포트',
+        itineraryTemplates: {
+          arrival: [
+            { time: '오전', title: '인천(ICN) 출발 → 뉴욕 JFK 도착 (TW701)', desc: '트리니티 항공 미 동부 노선 탑승 및 도착', cost: 0 },
+            { time: '오후', title: '33호텔 바이 소노캄 뉴욕 시포트 체크인', desc: '피어 17 및 이스트강 주변 산책', cost: 45000 },
+            { time: '저녁', title: '시포트 로컬 레스토랑 디너', desc: '맨해튼 도심 저녁 식사 및 휴식', cost: 110000 }
+          ],
+          middle: [
+            [
+              { time: '오전', title: '브루클린 브리지 & 덤보(DUMBO) 투어', desc: '브리지 도보 이동 및 맨해튼 뷰 감상', cost: 25000 },
+              { time: '오후', title: '월스트리트 · 소호(SoHo) 탐방', desc: '로우어 맨해튼 명소 및 부티크 거리 투어', cost: 95000 },
+              { time: '저녁', title: '타임스스퀘어 & 브로드웨이 관람', desc: '맨해튼 중심 야경 및 공연 관람', cost: 160000 }
+            ],
+            [
+              { time: '오전', title: '센트럴파크 & 미술관 투어', desc: '공원 산책 및 주요 미술관 관람', cost: 65000 },
+              { time: '오후', title: '하이라인 파크 & 첼시 마켓 투어', desc: '공중정원 산책 및 마켓 런치', cost: 60000 },
+              { time: '저녁', title: '호텔 라운지 & 맨해튼 야경 휴식', desc: '시포트 주변 야경 감상', cost: 50000 }
+            ]
+          ],
+          departure: [
+            { time: '오전', title: '브런치 후 체크아웃 & 공항 이동', desc: '14:00 레이트 체크아웃 혜택 활용 후 JFK 이동', cost: 30000 },
+            { time: '오후', title: '뉴욕(JFK) 출발 → 인천(ICN) 귀국 (TW702)', desc: '수하물 +5kg 혜택 적용 귀국', cost: 0 },
+            { time: '저녁', title: '인천국제공항 도착 (익일 오후)', desc: '뉴욕 일정 마무리', cost: 0 }
+          ]
+        }
+      },
+      {
+        id: 'washington',
+        regionGroup: 'americas',
+        regionLabel: '미주 · 미국 동부',
+        city: '미국 워싱턴 D.C. (IAD)',
+        airportCode: 'IAD',
+        resort: '노르망디 호텔 워싱턴 D.C. (The Normandy Hotel Washington D.C.)',
+        tagline: '칼로라마 외교가 부티크 호텔 · 내셔널 몰·듀폰 서클 인접',
+        flightNo: 'TW705',
+        returnFlightNo: 'TW706',
+        flightDuration: '14시간 30분',
+        scheduleOut: 'ICN 11:00 → IAD 11:45',
+        scheduleIn: 'IAD 13:30 → ICN 17:40(+1)',
+        flightBase: 1380000,
+        hotelBase: 440000,
+        activityDaily: 185000,
+        badge: '워싱턴 D.C.',
+        itineraryTemplates: {
+          arrival: [
+            { time: '오전', title: '인천(ICN) 출발 → 워싱턴 덜레스(IAD) 도착 (TW705)', desc: '트리니티 항공 미 동부 노선 도착 및 시내 이동', cost: 0 },
+            { time: '오후', title: '노르망디 호텔 워싱턴 D.C. 체크인', desc: '칼로라마·듀폰 서클 주변 산책 및 휴식', cost: 35000 },
+            { time: '저녁', title: '듀폰 서클 다이닝', desc: '호텔 인근 레스토랑 저녁 식사', cost: 85000 }
+          ],
+          middle: [
+            [
+              { time: '오전', title: '내셔널 몰 · 링컨 기념관 투어', desc: '주요 기념물 및 도심 산책', cost: 30000 },
+              { time: '오후', title: '스미소니언 박물관 단지 관람', desc: '박물관 투어 및 카페 휴식', cost: 40000 },
+              { time: '저녁', title: '더 워프(The Wharf) 워터프론트 디너', desc: '강변 산책 및 저녁 식사', cost: 90000 }
+            ],
+            [
+              { time: '오전', title: '조지타운(Georgetown) 거리 탐방', desc: '상점가 및 운하 산책로 투어', cost: 45000 },
+              { time: '오후', title: '의사당 주변 & 도서관 투어', desc: '주요 건축물 관람', cost: 35000 },
+              { time: '저녁', title: '호텔 복귀 & 휴식', desc: '부티크 호텔 라운지 휴식', cost: 45000 }
+            ]
+          ],
+          departure: [
+            { time: '오전', title: '조식 후 체크아웃 & 덜레스 공항(IAD) 이동', desc: '14:00 레이트 체크아웃 혜택 활용', cost: 0 },
+            { time: '오후', title: '워싱턴(IAD) 출발 → 인천(ICN) 귀국 (TW706)', desc: '수하물 +5kg 혜택 적용 귀국', cost: 0 },
+            { time: '저녁', title: '인천국제공항 도착 (익일 오후)', desc: '워싱턴 D.C. 일정 마무리', cost: 0 }
+          ]
+        }
+      },
+      {
+        id: 'hawaii',
+        regionGroup: 'americas',
+        regionLabel: '미주 · 하와이',
+        city: '미국 하와이 호놀룰루 (HNL)',
+        airportCode: 'HNL',
+        resort: '와이키키 리조트 호텔 (Waikiki Resort Hotel)',
+        tagline: '와이키키 해변 인접 · 오션뷰 객실 및 휴양 호텔',
+        flightNo: 'TW805',
+        returnFlightNo: 'TW806',
+        flightDuration: '8시간 15분',
+        scheduleOut: 'ICN 20:20 → HNL 09:35',
+        scheduleIn: 'HNL 11:40 → ICN 17:15(+1)',
+        flightBase: 920000,
+        hotelBase: 410000,
+        activityDaily: 170000,
+        badge: '하와이 와이키키',
+        itineraryTemplates: {
+          arrival: [
+            { time: '오전', title: '호놀룰루(HNL) 오전 도착 (TW805)', desc: '트리니티 항공 하와이 노선 도착', cost: 0 },
+            { time: '오후', title: '와이키키 리조트 호텔 체크인 & 해변 산책', desc: '와이키키 비치 산책 및 휴식', cost: 45000 },
+            { time: '저녁', title: '칼라카우아 애비뉴 디너', desc: '해변가 레스토랑 저녁 식사', cost: 85000 }
+          ],
+          middle: [
+            [
+              { time: '오전', title: '다이아몬드 헤드 트레킹', desc: '와이키키 해안 전망 감상', cost: 25000 },
+              { time: '오후', title: '하나우마 베이 또는 해변 액티비티', desc: '스노클링 및 해변 휴양', cost: 75000 },
+              { time: '저녁', title: '알라모아나 센터 쇼핑 & 다이닝', desc: '쇼핑 및 저녁 식사', cost: 90000 }
+            ],
+            [
+              { time: '오전', title: '오아후 동부 해안 드라이브', desc: '해변 산책 및 브런치', cost: 60000 },
+              { time: '오후', title: '쿠알로아 랜치 투어', desc: '자연 경관 투어 및 체험', cost: 130000 },
+              { time: '저녁', title: '와이키키 선셋 크루즈 또는 디너', desc: '석양 감상 및 저녁 식사', cost: 80000 }
+            ]
+          ],
+          departure: [
+            { time: '오전', title: '조식 후 체크아웃 & 와이키키 산책', desc: '셔틀 연계 호놀룰루 공항(HNL) 이동', cost: 20000 },
+            { time: '오후', title: '호놀룰루(HNL) 출발 → 인천(ICN) 귀국 (TW806)', desc: 'TW × SONO 수하물 +5kg 혜택 적용', cost: 0 },
+            { time: '저녁', title: '인천국제공항 도착 (익일 오후)', desc: '하와이 일정 마무리', cost: 0 }
+          ]
+        }
+      },
+      {
+        id: 'paris',
+        regionGroup: 'europe',
+        regionLabel: '유럽 · 프랑스',
+        city: '프랑스 파리 (CDG)',
+        airportCode: 'CDG',
+        resort: '호텔 담 데 자르 (Hôtel Dame des Arts)',
+        tagline: '파리 생제르맹 데 프레 · 루프탑 뷰 부티크 호텔',
+        flightNo: 'TW401',
+        returnFlightNo: 'TW402',
+        flightDuration: '13시간 50분',
+        scheduleOut: 'ICN 12:15 → CDG 18:30',
+        scheduleIn: 'CDG 20:30 → ICN 15:40(+1)',
+        flightBase: 1280000,
+        hotelBase: 540000,
+        activityDaily: 195000,
+        badge: '파리 부티크',
+        itineraryTemplates: {
+          arrival: [
+            { time: '오전', title: '인천(ICN) 출발 → 파리 샤를드골(CDG) 이동 (TW401)', desc: '트리니티 항공 유럽 노선 탑승', cost: 0 },
+            { time: '오후', title: '파리 도착 & 호텔 담 데 자르 이동', desc: '생제르맹 데 프레 이동 및 체크인', cost: 0 },
+            { time: '저녁', title: '루프탑 뷰 감상 & 파리 저녁 식사', desc: '호텔 루프탑 및 주변 비스트로 이용', cost: 55000 }
+          ],
+          middle: [
+            [
+              { time: '오전', title: '루브르 박물관 & 튈르리 정원 산책', desc: '주요 작품 관람 및 정원 산책', cost: 55000 },
+              { time: '오후', title: '오르세 미술관 & 생제르맹 거리', desc: '미술관 관람 및 카페 휴식', cost: 65000 },
+              { time: '저녁', title: '센강 유람선 & 프렌치 디너', desc: '야간 유람선 탑승 및 저녁 식사', cost: 95000 }
+            ],
+            [
+              { time: '오전', title: '몽마르트르 언덕 & 사크레쾨르 대성당', desc: '언덕 산책 및 시내 조망', cost: 35000 },
+              { time: '오후', title: '마레 지구 & 뤽상부르 공원', desc: '거리 탐방 및 공원 휴식', cost: 60000 },
+              { time: '저녁', title: '호텔 담 데 자르 레스토랑 디너', desc: '레스토랑 코스 및 휴식', cost: 85000 }
+            ]
+          ],
+          departure: [
+            { time: '오전', title: '조식 후 체크아웃 & 생제르맹 산책', desc: '14:00 레이트 체크아웃 혜택 활용', cost: 30000 },
+            { time: '오후', title: '샤를드골 공항(CDG) 이동 및 출국 수속', desc: '수하물 +5kg 혜택 적용 수속', cost: 0 },
+            { time: '저녁', title: '파리(CDG) 출발 → 인천(ICN) 귀국 (TW402)', desc: '파리 일정 마무리', cost: 0 }
+          ]
+        }
+      }
+    ];
+
+    const SEAT_MULTIPLIERS = {
+      economy: { label: '이코노미 스마트', factor: 1.0 },
+      business: { label: '비즈니스 세이버', factor: 1.85 }
+    };
+
+    const ROOM_MULTIPLIERS = {
+      standard: { label: '디럭스/스탠다드', factor: 1.0 },
+      suite: { label: '시그니처 스위트', factor: 1.45 },
+      villa: { label: '프레스티지·빌라', factor: 1.9 }
+    };
+
+    const ACTIVITY_LEVELS = {
+      light: { label: '실속 자유여행', factor: 0.75 },
+      standard: { label: '밸런스 투어', factor: 1.0 },
+      luxury: { label: '럭셔리 다이닝', factor: 1.5 }
+    };
+
+    // =========================================================================
+    // 2. 애플리케이션 상태 및 일정 생성/편집 관리
+    // =========================================================================
+    const defaultStartDate = new Date();
+    defaultStartDate.setDate(defaultStartDate.getDate() + 14);
+    const formatInputDate = (d) => d.toISOString().split('T')[0];
+
+    const state = {
+      regionFilter: 'all',
+      destinationId: DESTINATIONS[0].id,
+      departureDate: formatInputDate(defaultStartDate),
+      nights: 3,
+      adults: 2,
+      children: 0,
+      seatClass: 'economy',
+      roomType: 'standard',
+      activityLevel: 'standard',
+      synergyEnabled: true,
+      targetBudget: 3500000,
+      itinerary: []
+    };
+
+    function getDestination() {
+      return DESTINATIONS.find((d) => d.id === state.destinationId) || DESTINATIONS[0];
+    }
+
+    function buildDefaultItinerary(dest, nights) {
+      const totalDays = nights + 1;
+      const days = [];
+      for (let day = 1; day <= totalDays; day++) {
+        let slots = [];
+        if (day === 1) {
+          slots = dest.itineraryTemplates.arrival;
+        } else if (day === totalDays) {
+          slots = dest.itineraryTemplates.departure;
+        } else {
+          const midPool = dest.itineraryTemplates.middle;
+          slots = midPool[(day - 2) % midPool.length];
+        }
+        days.push({
+          dayNumber: day,
+          items: slots.map((slot, idx) => ({
+            id: `d${day}-i${idx}-${Math.random().toString(36).slice(2, 7)}`,
+            time: slot.time,
+            title: slot.title,
+            desc: slot.desc,
+            cost: slot.cost,
+            memo: ''
+          }))
+        });
+      }
+      return days;
+    }
+
+    function syncItineraryWithNights(forceRebuild = false) {
+      const dest = getDestination();
+      const targetDays = state.nights + 1;
+      if (forceRebuild || state.itinerary.length !== targetDays) {
+        const previousMap = new Map();
+        if (!forceRebuild) {
+          state.itinerary.forEach((d) => previousMap.set(d.dayNumber, d));
+        }
+        const rebuilt = buildDefaultItinerary(dest, state.nights);
+        if (!forceRebuild) {
+          rebuilt.forEach((d) => {
+            if (d.dayNumber !== 1 && d.dayNumber !== targetDays && previousMap.has(d.dayNumber)) {
+              const prev = previousMap.get(d.dayNumber);
+              if (prev.items && prev.items.length > 0 && prev.items[0].title !== dest.itineraryTemplates.departure[0].title) {
+                d.items = prev.items;
+              }
+            }
+          });
+        }
+        state.itinerary = rebuilt;
+      }
+    }
+
+    function resetItinerary() {
+      state.itinerary = buildDefaultItinerary(getDestination(), state.nights);
+      renderItinerary();
+      updateBudgetCalculation();
+    }
+
+    // =========================================================================
+    // 3. UI 렌더링 함수
+    // =========================================================================
+    function formatKRW(amount) {
+      return Math.round(amount).toLocaleString('ko-KR') + '원';
+    }
+
+    function formatDateWithDay(dateStr, addDays = 0) {
+      const base = new Date(dateStr + 'T00:00:00');
+      if (Number.isNaN(base.getTime())) return '';
+      base.setDate(base.getDate() + addDays);
+      const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+      const m = base.getMonth() + 1;
+      const d = base.getDate();
+      const w = weekdays[base.getDay()];
+      return `${m}/${d}(${w})`;
+    }
+
+    function renderRegionTabs() {
+      document.querySelectorAll('.region-tab').forEach((btn) => {
+        const active = btn.dataset.region === state.regionFilter;
+        btn.className = active
+          ? 'region-tab py-1.5 rounded-lg text-xs font-bold transition cursor-pointer bg-navy-900 text-white shadow-sm'
+          : 'region-tab py-1.5 rounded-lg text-xs font-bold transition cursor-pointer text-slate-600 hover:text-navy-900';
+      });
+    }
+
+    function renderDestinations() {
+      const listEl = document.getElementById('destination-list');
+      const filtered = state.regionFilter === 'all'
+        ? DESTINATIONS
+        : DESTINATIONS.filter((d) => d.regionGroup === state.regionFilter);
+
+      listEl.innerHTML = filtered.map((dest) => {
+        const selected = dest.id === state.destinationId;
+        return `
+          <button type="button" onclick="selectDestination('${dest.id}')"
+            class="w-full text-left p-3.5 rounded-xl border transition-all cursor-pointer ${
+              selected
+                ? 'bg-navy-900 text-white border-navy-900 shadow-md ring-2 ring-sky-400/50'
+                : 'bg-white hover:bg-slate-50 text-slate-800 border-slate-200/90'
+            }">
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <span class="text-[10px] font-display font-extrabold px-1.5 py-0.5 rounded ${
+                    selected ? 'bg-sky-400/20 text-sky-300' : 'bg-sky-50 text-sky-700'
+                  }">${dest.flightNo}</span>
+                  <span class="text-xs font-extrabold truncate">${dest.city}</span>
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                    selected ? 'bg-champagne-400/20 text-champagne-300' : 'bg-amber-50 text-amber-800'
+                  }">${dest.badge}</span>
+                </div>
+                <div class="text-xs font-semibold mt-1 truncate ${
+                  selected ? 'text-champagne-300' : 'text-navy-900'
+                }">${dest.resort}</div>
+                <div class="text-[11px] mt-0.5 line-clamp-1 ${
+                  selected ? 'text-slate-300' : 'text-slate-500'
+                }">${dest.tagline}</div>
+              </div>
+              <div class="text-right shrink-0">
+                <div class="text-[10px] ${selected ? 'text-slate-400' : 'text-slate-400'}">항공/박 기준</div>
+                <div class="text-xs font-extrabold font-display ${selected ? 'text-sky-300' : 'text-navy-900'}">${Math.round(dest.flightBase / 10000)}만~</div>
+              </div>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectDestination(id) {
+      state.destinationId = id;
+      state.itinerary = buildDefaultItinerary(getDestination(), state.nights);
+      renderDestinations();
+      renderHeroBanner();
+      renderItinerary();
+      updateBudgetCalculation();
+    }
+
+    function renderHeroBanner() {
+      const dest = getDestination();
+      document.getElementById('header-flight-pill').innerHTML = `
+        <i class="fa-solid fa-ticket text-sky-400"></i>
+        <span>${dest.flightNo} · ${dest.airportCode} 연계</span>
+      `;
+      document.getElementById('hero-region-badge').textContent = dest.regionLabel;
+      document.getElementById('hero-flight-code').textContent = `FLIGHT ${dest.flightNo}/${dest.returnFlightNo} · 비행 ${dest.flightDuration}`;
+      document.getElementById('hero-title').textContent = dest.resort;
+      document.getElementById('hero-subtitle').textContent = `${dest.city} — ${dest.tagline}`;
+      document.getElementById('hero-schedule-out').textContent = `${dest.flightNo}: ${dest.scheduleOut}`;
+      document.getElementById('hero-schedule-in').textContent = `${dest.returnFlightNo}: ${dest.scheduleIn}`;
+      document.getElementById('flight-code-mini').textContent = dest.flightNo;
+    }
+
+    function renderControlsState() {
+      document.getElementById('departure-date').value = state.departureDate;
+      document.getElementById('nights-slider').value = state.nights;
+      document.getElementById('nights-display').textContent = `${state.nights}박 ${state.nights + 1}일`;
+      document.getElementById('adults-count').textContent = state.adults;
+      document.getElementById('children-count').textContent = state.children;
+      document.getElementById('target-budget-input').value = state.targetBudget;
+      document.getElementById('synergy-toggle').checked = state.synergyEnabled;
+
+      document.querySelectorAll('.night-quick-btn').forEach((btn) => {
+        const n = Number(btn.dataset.nights);
+        const active = n === state.nights;
+        btn.className = active
+          ? 'night-quick-btn py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer bg-sky-500 text-white border-sky-500'
+          : 'night-quick-btn py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer bg-white text-slate-600 border-slate-200 hover:border-slate-300';
+      });
+
+      document.querySelectorAll('.seat-btn').forEach((btn) => {
+        const active = btn.dataset.seat === state.seatClass;
+        btn.className = active
+          ? 'seat-btn p-3 rounded-xl border text-left transition cursor-pointer bg-navy-900 text-white border-navy-900 shadow-sm'
+          : 'seat-btn p-3 rounded-xl border text-left transition cursor-pointer bg-white text-slate-700 border-slate-200 hover:bg-slate-50';
+      });
+
+      document.querySelectorAll('.room-btn').forEach((btn) => {
+        const active = btn.dataset.room === state.roomType;
+        btn.className = active
+          ? 'room-btn p-2.5 rounded-xl border text-center transition cursor-pointer bg-navy-900 text-white border-navy-900 shadow-sm'
+          : 'room-btn p-2.5 rounded-xl border text-center transition cursor-pointer bg-white text-slate-700 border-slate-200 hover:bg-slate-50';
+      });
+
+      document.querySelectorAll('.act-btn').forEach((btn) => {
+        const active = btn.dataset.activity === state.activityLevel;
+        btn.className = active
+          ? 'act-btn py-2 px-2 rounded-xl border text-xs font-semibold transition cursor-pointer bg-sky-500 text-white border-sky-500 shadow-sm'
+          : 'act-btn py-2 px-2 rounded-xl border text-xs font-semibold transition cursor-pointer bg-white text-slate-700 border-slate-200 hover:bg-slate-50';
+      });
+
+      document.getElementById('activity-label').textContent = ACTIVITY_LEVELS[state.activityLevel].label;
+
+      const badgesEl = document.getElementById('synergy-badges');
+      if (state.synergyEnabled) {
+        badgesEl.classList.remove('opacity-40', 'grayscale');
+      } else {
+        badgesEl.classList.add('opacity-40', 'grayscale');
+      }
+    }
+
+    // =========================================================================
+    // 4. 실시간 예산 및 결합혜택 계산 엔진
+    // =========================================================================
+    function getCustomItineraryCostDelta() {
+      const dest = getDestination();
+      const baseBuilder = buildDefaultItinerary(dest, state.nights);
+      const baseSum = baseBuilder.reduce((acc, day) => {
+        return acc + day.items.reduce((s, item) => s + (Number(item.cost) || 0), 0);
+      }, 0);
+      const currentSum = state.itinerary.reduce((acc, day) => {
+        return acc + day.items.reduce((s, item) => s + (Number(item.cost) || 0), 0);
+      }, 0);
+      return currentSum - baseSum;
+    }
+
+    function calculateCosts() {
+      const dest = getDestination();
+      const totalPax = Math.max(1, state.adults + state.children);
+      const effectivePax = state.adults + state.children * 0.75;
+      const roomsNeeded = Math.max(1, Math.ceil(totalPax / 2));
+
+      const seatFactor = SEAT_MULTIPLIERS[state.seatClass].factor;
+      const roomFactor = ROOM_MULTIPLIERS[state.roomType].factor;
+      const actFactor = ACTIVITY_LEVELS[state.activityLevel].factor;
+
+      const flightCost = Math.round(dest.flightBase * seatFactor * effectivePax);
+
+      const rawHotelCost = Math.round(dest.hotelBase * roomFactor * state.nights * roomsNeeded);
+      const hotelDiscount = state.synergyEnabled ? Math.round(rawHotelCost * 0.15) : 0;
+      const hotelCost = rawHotelCost - hotelDiscount;
+
+      const shuttleSaving = state.synergyEnabled ? Math.round(45000 * roomsNeeded) : 0;
+      const rawActivityCost = Math.max(
+        0,
+        Math.round(dest.activityDaily * actFactor * state.nights * effectivePax) + getCustomItineraryCostDelta()
+      );
+      const activityCost = Math.max(0, rawActivityCost - shuttleSaving);
+
+      const totalSaved = hotelDiscount + shuttleSaving;
+      const totalCost = flightCost + hotelCost + activityCost;
+      const perPersonCost = Math.round(totalCost / totalPax);
+
+      return {
+        flightCost,
+        hotelCost,
+        rawHotelCost,
+        activityCost,
+        totalSaved,
+        totalCost,
+        perPersonCost,
+        totalPax,
+        roomsNeeded
+      };
+    }
+
+    function updateBudgetCalculation() {
+      const {
+        flightCost,
+        hotelCost,
+        rawHotelCost,
+        activityCost,
+        totalSaved,
+        totalCost,
+        perPersonCost
+      } = calculateCosts();
+
+      document.getElementById('cost-flight').textContent = formatKRW(flightCost);
+      document.getElementById('cost-flight-sub').textContent = `${SEAT_MULTIPLIERS[state.seatClass].label} · ${state.adults}성인${state.children > 0 ? ` ${state.children}아동` : ''}`;
+
+      document.getElementById('cost-hotel').textContent = formatKRW(hotelCost);
+      const hotelOrigEl = document.getElementById('cost-hotel-orig');
+      const hotelSubEl = document.getElementById('cost-hotel-sub');
+      if (state.synergyEnabled && totalSaved > 0) {
+        hotelOrigEl.textContent = formatKRW(rawHotelCost);
+        hotelOrigEl.classList.remove('hidden');
+        hotelSubEl.textContent = `${state.nights}박 · 15% 결합할인 적용`;
+        hotelSubEl.className = 'text-[11px] text-emerald-600 font-semibold mt-0.5';
+      } else {
+        hotelOrigEl.classList.add('hidden');
+        hotelSubEl.textContent = `${state.nights}박 · ${ROOM_MULTIPLIERS[state.roomType].label}`;
+        hotelSubEl.className = 'text-[11px] text-slate-400 mt-0.5';
+      }
+
+      document.getElementById('cost-activity').textContent = formatKRW(activityCost);
+      document.getElementById('cost-activity-sub').textContent = state.synergyEnabled
+        ? `${ACTIVITY_LEVELS[state.activityLevel].label} · 셔틀혜택 반영`
+        : `${ACTIVITY_LEVELS[state.activityLevel].label}`;
+
+      const safeTotal = Math.max(1, totalCost);
+      const flightPct = Math.round((flightCost / safeTotal) * 100);
+      const hotelPct = Math.round((hotelCost / safeTotal) * 100);
+      const actPct = Math.max(0, 100 - flightPct - hotelPct);
+
+      document.getElementById('ratio-flight').textContent = `${flightPct}%`;
+      document.getElementById('ratio-hotel').textContent = `${hotelPct}%`;
+      document.getElementById('ratio-activity').textContent = `${actPct}%`;
+
+      document.getElementById('stack-bar-flight').style.width = `${flightPct}%`;
+      document.getElementById('stack-bar-hotel').style.width = `${hotelPct}%`;
+      document.getElementById('stack-bar-activity').style.width = `${actPct}%`;
+
+      document.getElementById('total-cost').textContent = formatKRW(totalCost);
+      document.getElementById('per-person-cost').textContent = formatKRW(perPersonCost);
+
+      const savedBadge = document.getElementById('total-saved-badge');
+      if (state.synergyEnabled && totalSaved > 0) {
+        savedBadge.textContent = `결합혜택 ${formatKRW(totalSaved)} 절약`;
+        savedBadge.className = 'px-2 py-0.5 rounded-md bg-champagne-400 text-navy-950 text-[11px] font-extrabold';
+      } else {
+        savedBadge.textContent = '결합혜택 미적용';
+        savedBadge.className = 'px-2 py-0.5 rounded-md bg-white/15 text-slate-200 text-[11px] font-semibold';
+      }
+
+      const target = Math.max(100000, Number(state.targetBudget) || 3500000);
+      const ratio = (totalCost / target) * 100;
+      const clampedWidth = Math.min(100, Math.max(4, ratio));
+      const gaugeBar = document.getElementById('budget-gauge-bar');
+      const statusBadge = document.getElementById('budget-status-badge');
+      const diffText = document.getElementById('budget-diff-text');
+      const diff = target - totalCost;
+
+      gaugeBar.style.width = `${clampedWidth}%`;
+
+      if (ratio <= 85) {
+        gaugeBar.className = 'h-full rounded-full bg-emerald-500 transition-all duration-300';
+        statusBadge.className = 'inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 self-start sm:self-auto';
+        statusBadge.innerHTML = `<i class="fa-solid fa-check-circle"></i> 예산 내 여유 (${Math.round(ratio)}%)`;
+        diffText.textContent = `목표 예산보다 ${formatKRW(diff)} 여유가 있습니다.`;
+      } else if (ratio <= 100) {
+        gaugeBar.className = 'h-full rounded-full bg-amber-400 transition-all duration-300';
+        statusBadge.className = 'inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 self-start sm:self-auto';
+        statusBadge.innerHTML = `<i class="fa-solid fa-scale-balanced"></i> 목표 예산 근접 (${Math.round(ratio)}%)`;
+        diffText.textContent = `목표 예산 내 ${formatKRW(diff)} 남았습니다.`;
+      } else {
+        gaugeBar.className = 'h-full rounded-full bg-rose-500 transition-all duration-300';
+        statusBadge.className = 'inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800 self-start sm:self-auto';
+        statusBadge.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> 목표 예산 초과 (${Math.round(ratio)}%)`;
+        diffText.textContent = `목표 예산을 ${formatKRW(Math.abs(diff))} 초과했습니다.`;
+      }
+    }
+
+    // =========================================================================
+    // 5. 일차별(Day 1 ~ Day N) 인터랙티브 일정 빌더
+    // =========================================================================
+    function renderItinerary() {
+      const container = document.getElementById('itinerary-container');
+      const dest = getDestination();
+      const totalDays = state.nights + 1;
+      document.getElementById('itinerary-total-days').textContent = totalDays;
+
+      container.innerHTML = state.itinerary.map((dayObj, dIdx) => {
+        const dateLabel = formatDateWithDay(state.departureDate, dIdx);
+        let dayTag = '여정';
+        if (dIdx === 0) dayTag = '출국 · 체크인';
+        else if (dIdx === totalDays - 1) dayTag = '체크아웃 · 귀국';
+        else dayTag = '현지 체류';
+
+        return `
+          <div class="rounded-2xl border border-slate-200/90 bg-slate-50/60 overflow-hidden">
+            <div class="bg-white px-4 py-3 border-b border-slate-200/80 flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="px-2.5 py-1 rounded-lg bg-navy-900 text-white font-display font-extrabold text-xs">DAY ${dayObj.dayNumber}</span>
+                <span class="text-xs font-bold text-slate-700">${dateLabel}</span>
+                <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-sky-50 text-sky-700">${dayTag}</span>
+                ${dIdx === 0 ? `<span class="text-[11px] text-slate-500 hidden sm:inline">· ${dest.resort}</span>` : ''}
+              </div>
+              <button type="button" onclick="addItineraryItem(${dIdx})"
+                class="text-xs font-bold text-sky-600 hover:text-sky-700 bg-sky-50 hover:bg-sky-100 px-2.5 py-1 rounded-lg transition flex items-center gap-1 cursor-pointer">
+                <i class="fa-solid fa-plus"></i> 일정 추가
+              </button>
+            </div>
+
+            <div class="p-3.5 sm:p-4 space-y-3">
+              ${dayObj.items.map((item, iIdx) => `
+                <div class="bg-white rounded-xl border border-slate-200/80 p-3.5 shadow-2xs space-y-2.5">
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2 flex-1 min-w-0">
+                      <select aria-label="시간대 선택" onchange="updateItineraryField(${dIdx}, ${iIdx}, 'time', this.value)"
+                        class="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 text-xs font-bold text-navy-900 focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer">
+                        <option value="오전" ${item.time === '오전' ? 'selected' : ''}>오전</option>
+                        <option value="오후" ${item.time === '오후' ? 'selected' : ''}>오후</option>
+                        <option value="저녁" ${item.time === '저녁' ? 'selected' : ''}>저녁</option>
+                      </select>
+                      <input type="text" value="${escapeAttr(item.title)}" placeholder="일정 제목 입력"
+                        oninput="updateItineraryField(${dIdx}, ${iIdx}, 'title', this.value)"
+                        class="flex-1 min-w-0 rounded-lg border border-transparent hover:border-slate-200 focus:border-sky-500 focus:bg-white px-2 py-1 text-xs sm:text-sm font-bold text-navy-900 focus:outline-none" />
+                    </div>
+
+                    <div class="flex items-center gap-1.5 shrink-0">
+                      <span class="text-[11px] text-slate-400 hidden sm:inline">예상비</span>
+                      <input type="number" step="5000" min="0" value="${item.cost || 0}"
+                        oninput="updateItineraryField(${dIdx}, ${iIdx}, 'cost', Number(this.value) || 0)"
+                        class="w-24 rounded-lg border border-slate-200 px-2 py-1 text-xs font-bold text-right text-slate-700 font-display focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                      <button type="button" onclick="removeItineraryItem(${dIdx}, ${iIdx})" title="일정 삭제"
+                        class="w-7 h-7 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 flex items-center justify-center transition cursor-pointer">
+                        <i class="fa-solid fa-trash-can text-xs"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <input type="text" value="${escapeAttr(item.desc)}" placeholder="상세 동선 및 활동 설명"
+                    oninput="updateItineraryField(${dIdx}, ${iIdx}, 'desc', this.value)"
+                    class="w-full rounded-lg bg-slate-50/80 border border-slate-200/60 focus:border-sky-500 focus:bg-white px-2.5 py-1.5 text-xs text-slate-600 focus:outline-none" />
+
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-note-sticky text-champagne-500 text-xs"></i>
+                    <input type="text" value="${escapeAttr(item.memo || '')}" placeholder="개인 메모 (예약번호, 동행 요청사항 등)"
+                      oninput="updateItineraryField(${dIdx}, ${iIdx}, 'memo', this.value)"
+                      class="w-full rounded-lg bg-amber-50/40 border border-amber-200/50 focus:border-champagne-400 focus:bg-white px-2.5 py-1 text-[11px] text-slate-700 focus:outline-none" />
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escapeAttr(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function updateItineraryField(dayIdx, itemIdx, field, value) {
+      const targetItem = state.itinerary[dayIdx]?.items[itemIdx];
+      if (!targetItem) return;
+      targetItem[field] = value;
+      if (field === 'cost') {
+        updateBudgetCalculation();
+      }
+    }
+
+    function addItineraryItem(dayIdx) {
+      const dayObj = state.itinerary[dayIdx];
+      if (!dayObj) return;
+      dayObj.items.push({
+        id: `custom-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+        time: '오후',
+        title: '새 일정 항목',
+        desc: '세부 일정을 입력하세요.',
+        cost: 30000,
+        memo: ''
+      });
+      renderItinerary();
+      updateBudgetCalculation();
+    }
+
+    function removeItineraryItem(dayIdx, itemIdx) {
+      const dayObj = state.itinerary[dayIdx];
+      if (!dayObj) return;
+      dayObj.items.splice(itemIdx, 1);
+      renderItinerary();
+      updateBudgetCalculation();
+    }
+
+    // =========================================================================
+    // 6. 견적 및 일정 요약 모달 & 원클릭 텍스트 복사
+    // =========================================================================
+    function generatePlainSummaryText() {
+      const dest = getDestination();
+      const costs = calculateCosts();
+      const endDateStr = formatDateWithDay(state.departureDate, state.nights);
+      const startDateStr = formatDateWithDay(state.departureDate, 0);
+
+      const lines = [
+        '==================================================',
+        'TRINITY AIR (TW) × SONO HOTELS & RESORTS 여행 요약',
+        '==================================================',
+        `• 목적지: ${dest.city}`,
+        `• 숙박 거점: ${dest.resort}`,
+        `• 항공편: ${dest.flightNo} (${dest.scheduleOut}) / ${dest.returnFlightNo} (${dest.scheduleIn})`,
+        `• 여행 기간: ${startDateStr} ~ ${endDateStr} (${state.nights}박 ${state.nights + 1}일)`,
+        `• 인원: 성인 ${state.adults}명, 아동 ${state.children}명`,
+        `• 좌석/객실: ${SEAT_MULTIPLIERS[state.seatClass].label} / ${ROOM_MULTIPLIERS[state.roomType].label}`,
+        `• 결합혜택 적용: ${state.synergyEnabled ? `적용 (${formatKRW(costs.totalSaved)} 절약)` : '미적용'}`,
+        '--------------------------------------------------',
+        `• 항공권 예상액: ${formatKRW(costs.flightCost)}`,
+        `• 숙박 예상액: ${formatKRW(costs.hotelCost)}`,
+        `• 현지 체류비 예상액: ${formatKRW(costs.activityCost)}`,
+        `• 총 예상 견적: ${formatKRW(costs.totalCost)} (1인 평균 ${formatKRW(costs.perPersonCost)})`,
+        `• 목표 예산: ${formatKRW(state.targetBudget)}`,
+        '--------------------------------------------------',
+        '[일차별 일정]'
+      ];
+
+      state.itinerary.forEach((day) => {
+        lines.push(`\n▶ DAY ${day.dayNumber} (${formatDateWithDay(state.departureDate, day.dayNumber - 1)})`);
+        day.items.forEach((item) => {
+          const costStr = item.cost ? ` [${formatKRW(item.cost)}]` : '';
+          lines.push(`  - (${item.time}) ${item.title}${costStr}`);
+          if (item.desc) lines.push(`    ${item.desc}`);
+          if (item.memo) lines.push(`    메모: ${item.memo}`);
+        });
+      });
+
+      return lines.join('\n');
+    }
+
+    function openSummaryModal() {
+      const dest = getDestination();
+      const costs = calculateCosts();
+      const modal = document.getElementById('summary-modal');
+      const content = document.getElementById('modal-summary-content');
+
+      content.innerHTML = `
+        <div class="rounded-xl bg-white border border-slate-200 p-4 space-y-2">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <span class="text-xs font-display font-extrabold text-sky-600">${dest.flightNo} · ${dest.returnFlightNo}</span>
+            <span class="text-xs font-semibold text-slate-500">${formatDateWithDay(state.departureDate, 0)} ~ ${formatDateWithDay(state.departureDate, state.nights)} (${state.nights}박 ${state.nights + 1}일)</span>
+          </div>
+          <div class="text-base font-extrabold text-navy-900">${dest.resort}</div>
+          <div class="text-xs text-slate-600">${dest.city} · 성인 ${state.adults}명, 아동 ${state.children}명 · ${SEAT_MULTIPLIERS[state.seatClass].label} / ${ROOM_MULTIPLIERS[state.roomType].label}</div>
+          <div class="text-xs text-slate-500 font-display">출국 ${dest.scheduleOut} | 귀국 ${dest.scheduleIn}</div>
+        </div>
+
+        <div class="rounded-xl bg-white border border-slate-200 p-4 space-y-2">
+          <div class="text-xs font-bold text-navy-900 mb-1">예산 요약</div>
+          <div class="flex justify-between text-xs"><span>항공권 (${dest.flightNo})</span><span class="font-bold font-display">${formatKRW(costs.flightCost)}</span></div>
+          <div class="flex justify-between text-xs"><span>숙박 (${state.nights}박)</span><span class="font-bold font-display">${formatKRW(costs.hotelCost)}</span></div>
+          <div class="flex justify-between text-xs"><span>현지 체류비</span><span class="font-bold font-display">${formatKRW(costs.activityCost)}</span></div>
+          ${state.synergyEnabled && costs.totalSaved > 0 ? `<div class="flex justify-between text-xs text-emerald-600 font-bold"><span>TRINITY × SONO 결합혜택 절감</span><span>-${formatKRW(costs.totalSaved)}</span></div>` : ''}
+          <div class="pt-2 border-t border-slate-100 flex justify-between items-baseline">
+            <span class="text-xs font-bold text-navy-900">총 예상 견적 (1인 ${formatKRW(costs.perPersonCost)})</span>
+            <span class="text-lg font-extrabold text-navy-900 font-display">${formatKRW(costs.totalCost)}</span>
+          </div>
+        </div>
+
+        <div class="space-y-2.5">
+          <div class="text-xs font-bold text-navy-900">일차별 일정 요약</div>
+          ${state.itinerary.map((day) => `
+            <div class="rounded-xl bg-white border border-slate-200 p-3.5 space-y-1.5">
+              <div class="text-xs font-extrabold text-navy-900">DAY ${day.dayNumber} · ${formatDateWithDay(state.departureDate, day.dayNumber - 1)}</div>
+              ${day.items.map((item) => `
+                <div class="text-xs text-slate-700 pl-2 border-l-2 border-sky-400">
+                  <span class="font-bold text-navy-900">[${item.time}] ${item.title}</span>
+                  ${item.desc ? `<div class="text-[11px] text-slate-500">${item.desc}</div>` : ''}
+                  ${item.memo ? `<div class="text-[11px] text-amber-800">메모: ${item.memo}</div>` : ''}
+                </div>
+              `).join('')}
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeSummaryModal() {
+      const modal = document.getElementById('summary-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function copySummaryText() {
+      const text = generatePlainSummaryText();
+      const helper = document.getElementById('clipboard-helper');
+      helper.value = text;
+      helper.select();
+      try {
+        document.execCommand('copy');
+      } catch (err) {
+        // execCommand 폴백 처리
+      }
+      const feedback = document.getElementById('copy-feedback');
+      feedback.classList.remove('opacity-0');
+      setTimeout(() => {
+        feedback.classList.add('opacity-0');
+      }, 2500);
+    }
+
+    // =========================================================================
+    // 7. 이벤트 리스너 등록 및 초기화
+    // =========================================================================
+    function updatePax(type, delta) {
+      if (type === 'adults') {
+        state.adults = Math.min(8, Math.max(1, state.adults + delta));
+      } else if (type === 'children') {
+        state.children = Math.min(6, Math.max(0, state.children + delta));
+      }
+      renderControlsState();
+      updateBudgetCalculation();
+    }
+
+    function setNights(nights) {
+      state.nights = Math.min(10, Math.max(2, Number(nights) || 3));
+      syncItineraryWithNights(false);
+      renderControlsState();
+      renderItinerary();
+      updateBudgetCalculation();
+    }
+
+    function bindEvents() {
+      document.querySelectorAll('.region-tab').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state.regionFilter = btn.dataset.region;
+          renderRegionTabs();
+          renderDestinations();
+        });
+      });
+
+      document.getElementById('departure-date').addEventListener('change', (e) => {
+        if (e.target.value) {
+          state.departureDate = e.target.value;
+          renderItinerary();
+        }
+      });
+
+      document.getElementById('nights-slider').addEventListener('input', (e) => {
+        setNights(e.target.value);
+      });
+
+      document.querySelectorAll('.night-quick-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          setNights(btn.dataset.nights);
+        });
+      });
+
+      document.querySelectorAll('.seat-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state.seatClass = btn.dataset.seat;
+          renderControlsState();
+          updateBudgetCalculation();
+        });
+      });
+
+      document.querySelectorAll('.room-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state.roomType = btn.dataset.room;
+          renderControlsState();
+          updateBudgetCalculation();
+        });
+      });
+
+      document.querySelectorAll('.act-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          state.activityLevel = btn.dataset.activity;
+          renderControlsState();
+          updateBudgetCalculation();
+        });
+      });
+
+      document.getElementById('synergy-toggle').addEventListener('change', (e) => {
+        state.synergyEnabled = e.target.checked;
+        renderControlsState();
+        updateBudgetCalculation();
+      });
+
+      document.getElementById('target-budget-input').addEventListener('input', (e) => {
+        state.targetBudget = Number(e.target.value) || 0;
+        updateBudgetCalculation();
+      });
+
+      document.getElementById('summary-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'summary-modal') {
+          closeSummaryModal();
+        }
+      });
+    }
+
+    function initApp() {
+      state.itinerary = buildDefaultItinerary(getDestination(), state.nights);
+      bindEvents();
+      renderRegionTabs();
+      renderDestinations();
+      renderHeroBanner();
+      renderControlsState();
+      renderItinerary();
+      updateBudgetCalculation();
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
